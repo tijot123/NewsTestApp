@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">NewsTestApp</string>
+
+    <string-array name="tabTitles">
+        <item>Top HeadLines</item>
+        <item>Everything</item>
+    </string-array>
+</resources>
