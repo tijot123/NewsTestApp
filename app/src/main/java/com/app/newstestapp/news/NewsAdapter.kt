@@ -8,11 +8,15 @@ import com.app.newstestapp.R
 import com.app.newstestapp.databinding.AdapterNewsBinding
 import com.app.newstestapp.model.NewsArticles
 
-class NewsAdapter(private val newsList: MutableList<NewsArticles>) :
+class NewsAdapter(
+    private val newsList: MutableList<NewsArticles>,
+    private val newsDataClickListener: NewsDataClickListener
+) :
     RecyclerView.Adapter<NewsAdapter.MyViewHolder>() {
-    class MyViewHolder(val binding: AdapterNewsBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MyViewHolder(private val binding: AdapterNewsBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(item: NewsArticles) {
-
+            binding.data = item
         }
     }
 
@@ -30,5 +34,9 @@ class NewsAdapter(private val newsList: MutableList<NewsArticles>) :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(newsList[position])
+        holder.itemView.setOnClickListener {
+            newsDataClickListener.onDataClicked(newsList[holder.adapterPosition])
+        }
     }
+
 }

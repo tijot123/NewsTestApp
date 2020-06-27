@@ -1,5 +1,7 @@
 package com.app.newstestapp.model
 
+import java.io.Serializable
+
 data class News(
     var status: String,
     var totalResults: Int,
@@ -14,4 +16,4 @@ data class NewsArticles(
     var urlToImage: String,
     var publishedAt: String,
     var content: String
-)
+) : Serializable

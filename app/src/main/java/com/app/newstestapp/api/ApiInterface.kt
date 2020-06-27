@@ -7,8 +7,14 @@ import retrofit2.http.Query
 
 interface ApiInterface {
     @GET(TOP_HEADLINES)
-    fun requestTopNewsContent(
+    fun requestTopHeadlines(
         @Query(PARAM_API_KEY) apiKey: String,
         @Query(PARAM_COUNTRY) country: String
+    ): Single<News>
+
+    @GET(EVERYTHING)
+    fun requestTopNewsContent(
+        @Query(PARAM_API_KEY) apiKey: String,
+        @Query(PARAM_SEARCH) searchKey: String
     ): Single<News>
 }

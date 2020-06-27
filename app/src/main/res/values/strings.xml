@@ -2,7 +2,10 @@
     <string name="app_name">NewsTestApp</string>
 
     <string-array name="tabTitles">
-        <item>Top HeadLines</item>
-        <item>Everything</item>
+        <item>Bitcoin</item>
+        <item>Corona</item>
+        <item>Bangalore</item>
+        <item>Lockdown</item>
+        <item>Technology</item>
     </string-array>
 </resources>

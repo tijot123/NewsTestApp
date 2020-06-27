@@ -11,7 +11,5 @@ class TabsAdapter(fm: FragmentManager, private val titleArray: Array<String>) :
 
     override fun getCount(): Int = titleArray.count()
 
-    override fun getPageTitle(position: Int): CharSequence? {
-        return titleArray[position]
-    }
+    override fun getPageTitle(position: Int): CharSequence? = titleArray[position]
 }

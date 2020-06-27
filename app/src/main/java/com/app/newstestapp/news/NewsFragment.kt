@@ -1,11 +1,13 @@
 package com.app.newstestapp.news
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.app.newstestapp.R
 import com.app.newstestapp.databinding.NewsFragmentBinding
@@ -23,9 +25,10 @@ class NewsFragment : Fragment() {
         }
     }
 
+    private lateinit var mAdapter: NewsAdapter
     private lateinit var viewModel: NewsViewModel
     private lateinit var binding: NewsFragmentBinding
-
+    private lateinit var newsDataClickListener: NewsDataClickListener
     private var currentPosition = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +46,20 @@ class NewsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this)[NewsViewModel::class.java]
-        viewModel.requestNewsWithPosition(currentPosition)
+        context?.let { viewModel.requestNewsWithPosition(currentPosition, it) }
+
+        viewModel.isApiSuccess.observe(viewLifecycleOwner, Observer {
+            binding.visible = false
+        })
+
+        viewModel.newsLiveDataList.observe(viewLifecycleOwner, Observer {
+            mAdapter = NewsAdapter(it, newsDataClickListener)
+            binding.recyclerView.adapter = mAdapter
+        })
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        newsDataClickListener = activity as NewsDataClickListener
+    }
 }

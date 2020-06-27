@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="headLinesInfo"
+            type="String" />
+
+        <variable
+            name="shouldShowHeadlines"
+            type="Boolean" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
         tools:context=".MainActivity">
 
         <androidx.appcompat.widget.Toolbar
@@ -25,20 +39,24 @@
             android:gravity="start"
             android:marqueeRepeatLimit="marquee_forever"
             android:padding="5dp"
+            android:text="@{headLinesInfo}"
             android:textColor="@android:color/white"
+            android:visibility="@{shouldShowHeadlines?View.VISIBLE:View.GONE}"
             app:layout_constraintTop_toBottomOf="@id/toolBar"
-            app:setMarquee="@{true}" />
+            app:setMarquee="@{shouldShowHeadlines}" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            app:tabSelectedTextColor="@android:color/white"
-            app:tabTextColor="@color/design_default_color_secondary_variant"
             app:layout_constraintTop_toBottomOf="@id/headLines"
             app:tabIndicatorColor="@android:color/white"
-            app:tabIndicatorHeight="1dp" />
+            app:tabIndicatorHeight="1dp"
+            app:tabMode="auto"
+            android:minWidth="0dp"
+            app:tabSelectedTextColor="@android:color/white"
+            app:tabTextColor="@color/design_default_color_secondary_variant" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/pager"
