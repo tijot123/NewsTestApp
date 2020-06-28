@@ -16,8 +16,8 @@ class NewsDetailsActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_news_details)
         setSupportActionBar(binding.toolBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val newsItem = intent.getSerializableExtra(KEY_ITEM) as NewsArticles
-        binding.data = newsItem
+        val newsItem = intent.getSerializableExtra(KEY_ITEM) as? NewsArticles
+        newsItem?.let { binding.data = it }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

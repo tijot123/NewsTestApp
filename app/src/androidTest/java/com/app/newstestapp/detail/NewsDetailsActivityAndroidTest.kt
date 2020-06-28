@@ -7,6 +7,7 @@ import com.app.newstestapp.R
 import com.app.newstestapp.api.KEY_ITEM
 import com.app.newstestapp.model.NewsArticles
 import junit.framework.Assert.assertNotNull
+import junit.framework.Assert.assertNull
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -42,6 +43,8 @@ internal class NewsDetailsActivityAndroidTest {
         val description = mContext.findViewById<TextView>(R.id.description)
         assertNotNull(description)
 
+        val newsItem = mContext.intent.getSerializableExtra(KEY_ITEM) as? NewsArticles
+        assertNull(newsItem)
 
     }
 }
